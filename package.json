@@ -1,5 +1,5 @@
 {
-  "name": "twillio-ai-plactice",
+  "name": "twilio-ai-plactice",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -26,7 +26,8 @@
     "dotenv": "^16.0.3",
     "module-alias": "^2.2.2",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "twilio": "^4.9.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
