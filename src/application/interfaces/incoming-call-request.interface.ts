@@ -1,7 +1,7 @@
 export interface IncomingCallRequest {
   callSid: string;
-  from: string;
-  to: string;
+  From: string;
+  To: string;
   direction: 'inbound' | 'outbound';
   timestamp: string;
   twilioSignature: string;
