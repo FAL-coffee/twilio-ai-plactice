@@ -9,17 +9,32 @@ moduleAlias.addAliases({
   '@constants': path.format({ dir: __dirname, name: 'constants' }),
 });
 
-// App modules
+// // App modules
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { APP_PORT } from './constants';
 import { ValidationPipe } from '@nestjs/common';
 
+// async function bootstrap() {
+//   const app = await NestFactory.create(AppModule);
+//   app.useGlobalPipes(new ValidationPipe());
+//   await app.listen(APP_PORT);
+
+//   console.log('Runing on port ==> ', APP_PORT);
+// }
+// bootstrap();
+// import express from 'express';
+// import { handleCall } from '@application/event-handlers/call-handler';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // app.use(express.urlencoded({ extended: false }));
+  // app.use(express.json());
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(APP_PORT);
 
+  console.log('start app');
   console.log('Runing on port ==> ', APP_PORT);
 }
 bootstrap();
