@@ -1,4 +1,11 @@
-import { Controller, Post, Req, Res, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
 import { LoggerService, Context } from '@domain/services/logger.service';
 import { twilioClient } from '@infrastructure/adapters/output-adapters/twilio/twilio.client';
 import { Twilio } from 'twilio';
@@ -16,6 +23,13 @@ export class CallController {
     this.twilioClient = twilioClient;
   }
 
+  // getを定義
+  @Get()
+  public test(@Res() res: any) {
+    console.log('Hello World!');
+    res.send('Hello World!');
+  }
+
   @Post()
   public async handleCall(@Req() req: any, @Res() res: any) {
     try {
@@ -28,19 +42,23 @@ export class CallController {
       console.log(`Incoming call from ${from} to ${to}`);
       this.Log.logger('Hello World!', context);
 
-      if (callStatus === 'ringing') {
-        // const twiml = await handleIncomingCall(
-        //   this.twilioClient.twiml.voiceResponse(),
-        // );
-        // await this.twilioClient.calls(callSid).update({ twiml: twiml });
+      // if (callStatus === 'ringing') {
+      // const twiml = await handleIncomingCall();
+      // this.twilioClient.voice
+      //   // await this.twilioClient.calls(callSid).update({ twiml: twiml });
 
-        const callResponse = await handleIncomingCall(
-          new twiml.VoiceResponse(),
-        );
-        await this.twilioClient.calls(callSid).update({ twiml: callResponse });
-      }
+      //   const callResponse = await handleIncomingCall(
+      //     new twiml.VoiceResponse(),
+      //   );
+      //   await this.twilioClient.calls(callSid).update({ twiml: callResponse });
+      // }
+      const resp = new twiml.VoiceResponse();
+      resp.say(
+        'こんにちわ、今日の天気はとても気持ちのいい晴れです。そろそろお昼ですね。',
+      );
+      res.send(resp.toString());
 
-      res.send();
+      // res.send();
     } catch (error) {
       console.error(error);
       res.status(500).send();

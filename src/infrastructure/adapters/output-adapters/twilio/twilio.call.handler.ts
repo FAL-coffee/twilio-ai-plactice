@@ -1,5 +1,5 @@
 import { twilioClient } from '@infrastructure/adapters/output-adapters/twilio/twilio.client';
-import Twilio from 'twilio';
+import Twilio, { twiml } from 'twilio';
 
 export const startIncomingCall = async (
   from: string,
@@ -27,9 +27,9 @@ export const stopIncomingCall = async (callSid: string): Promise<void> => {
 };
 
 export const handleIncomingCall = async (
-  request: Twilio.twiml.VoiceResponse,
+  request: twiml.VoiceResponse,
 ): Promise<string> => {
-  const response = new Twilio.twiml.VoiceResponse();
+  const response = new twiml.VoiceResponse();
   response.say('Hello, World!');
 
   return response.toString();
